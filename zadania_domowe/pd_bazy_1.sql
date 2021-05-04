@@ -23,7 +23,3 @@ CREATE TABLE expenses (
     FOREIGN KEY (category_id) REFERENCES categories(category_id) ON UPDATE CASCADE ON DELETE RESTRICT,
     FOREIGN KEY (user_id) REFERENCES users(user_id) ON UPDATE CASCADE ON DELETE RESTRICT
 );
-
--- TODO:
--- - ograniczenia na liczby znaków
--- - hasła?
