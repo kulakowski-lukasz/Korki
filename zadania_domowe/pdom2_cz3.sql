@@ -3,8 +3,8 @@ USE pdom2;
 
 -- Cleanup (to uncomment)
 -- DROP TABLE employees;
-DROP TABLE departments;
-DROP TABLE jobs;
+-- DROP TABLE departments;
+-- DROP TABLE jobs;
 
 -- Napisz instrukcje SQL ktora:
 -- 1. utworzy tabelę "departments" (jeżeli nie istnieje) z następującymi kolumnami: DEPARTMENT_ID, DEPARTMENT_NAME, MANAGER_ID, LOCATION_ID - gdzie kluczem głównym będzie DEPARTMENT_ID.
@@ -53,10 +53,22 @@ CREATE TABLE IF NOT EXISTS employees (
     job_id INT NOT NULL,
     salary DECIMAL(9, 2),
     FOREIGN KEY (department_id) REFERENCES departments(department_id) ON UPDATE CASCADE ON DELETE RESTRICT,
-    FOREIGN KEY (job_id, max_salary, min_salary) REFERENCES jobs(job_id, max_salary, min_salary) ON UPDATE CASCADE ON DELETE RESTRICT,
-    CONSTRAINT max_salary CHECK ((salary <= max_salary)),
-    CONSTRAINT min_salary CHECK ((salary >= min_salary))
+    FOREIGN KEY (job_id) REFERENCES jobs(job_id) ON UPDATE CASCADE ON DELETE RESTRICT
+    -- CONSTRAINT max_salary CHECK ((salary <= max_salary)),
+    -- CONSTRAINT min_salary CHECK ((salary >= min_salary))
 );
 
 -- 7. doda 2 pracowników do tabeli "employees"
+INSERT INTO
+    employees
+VALUES
+    (1, 'Lukasz', 'Kulakowski', 1, 2, 4321),
+    (2, 'John', 'Doe', 2, 1, 23456);
+
 -- 8. spróbuj dodać pracownika do działu, który nie istnieje - jaki błąd został wyświetlony i dlaczego?
+INSERT INTO
+    employees
+VALUES
+    (3, 'Jan', 'Kowalski', 5, 2, 4321);
+-- Wynik: ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`pdom2`.`employees`, CONSTRAINT `employees_ibfk_1` FOREIGN KEY (`department_id`) REFERENCES `departments` (`department_id`) ON DELETE RESTRICT ON UPDATE CASCADE)
+-- Powod: Odnosimy sie do wartosci department_id z tabeli departments ktora nie istnieje - cannot add row
