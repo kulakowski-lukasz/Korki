@@ -1,4 +1,3 @@
-from hashlib import new
 from pyfiglet import Figlet
 import matplotlib.pyplot as plt
 import random
@@ -6,9 +5,6 @@ import random
 #P.M. made me.
 #Inspiration: https://en.wikipedia.org/wiki/Monty_Hall_problem
 
-
-figlet_obj = Figlet();
-print(figlet_obj.renderText("Monty Hall Paradox"))
 
 games = 10
 tries = 9999
@@ -62,6 +58,7 @@ games_true = []
 for i in range(0, games):
     games_true.append(the_game(doors, tries, True))
 
+#running many games - with change = False
 games_false = []
 for i in range(0, games):
     games_false.append(the_game(doors, tries, False))
