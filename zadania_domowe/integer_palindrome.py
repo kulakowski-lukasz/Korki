@@ -1,9 +1,5 @@
 #Task description can be found here: https://pastebin.com/nMRAZFjG?
 
-digits = 1000000
-
-#given integer
-
 #Task - write the value of the smallest palindrome larger than K to output. Numbers are always displayed without leading zeros
 #the first line contains integer t, the number of test cases
 #integers K are given in the next t lines
